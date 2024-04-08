@@ -18,8 +18,8 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="name")
-    String nom;
-    String email;
+    private String nom;
+    private String email;
 
 
 }
