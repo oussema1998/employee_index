@@ -1,5 +1,7 @@
 package services;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -11,12 +13,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import Utils.Constants;
 
 import entities.Employee;
 
 public class EmployeeService {
 
-    private static final String BASE_URL = "http://localhost:8085/employee/";
+    private static final String BASE_URL = "http://"+ Constants.MY_IP_ADRESS+":8085/employee/";
 
     public interface EmployeeCallback {
         void onSuccess(List<Employee> employees);
@@ -54,6 +57,7 @@ public class EmployeeService {
                 return Arrays.asList(employees);
             } catch (Exception e) {
                 Log.e("EmployeeService", "Error fetching employees", e);
+                Log.e(TAG, "Error fetching employees", e);
                 return null;
             }
         }
