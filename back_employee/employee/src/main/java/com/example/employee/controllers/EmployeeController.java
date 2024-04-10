@@ -2,13 +2,13 @@ package com.example.employee.controllers;
 
 import com.example.employee.entities.Employee;
 import com.example.employee.interfaces.EmployeeRepo;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Validated
 @RestController
 @RequestMapping("/employee")
 
@@ -20,4 +20,7 @@ public class EmployeeController {
     public List<Employee> GetAllEmployees(){
         return employeeRepo.findAll();
     }
+
+    @PostMapping("/add")
+    public Employee AddEmployee(@Valid @RequestBody Employee e){return  employeeRepo.save(e);}
 }
