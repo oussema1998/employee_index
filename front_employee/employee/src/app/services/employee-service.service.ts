@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Employee } from '../entities/employee';
 @Injectable({
@@ -20,8 +20,10 @@ export class EmployeeServiceService {
     );
   }
 
-  AddProduct(e:Employee){
-    return this.httpClient.post(`${this.baseURL}/add`,e)
+  AddEmployee(e:Employee){
+    return this.httpClient.post<Employee>(`${this.baseURL}/add`,e)
   }
+
+  
 
 }
