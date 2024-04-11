@@ -34,8 +34,13 @@ public class Employee {
         this.nom = nom;
     }
 
-    public Employee(int id, String email, String nom) {
+    public Employee(int id,  String nom,String email) {
         this.id = id;
+        this.email = email;
+        this.nom = nom;
+    }
+
+    public Employee(String nom,String email) {
         this.email = email;
         this.nom = nom;
     }
