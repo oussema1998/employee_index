@@ -12,6 +12,7 @@ import { EmployeeServiceService } from '../services/employee-service.service';
             <th> ID</th>
             <th> Email</th>
             <th> Name</th>
+            <th>Actions</th>
            
         </tr>
     </thead>
@@ -20,6 +21,7 @@ import { EmployeeServiceService } from '../services/employee-service.service';
             <td> {{ employee.id }} </td>
             <td> {{ employee.email }} </td>
             <td> {{ employee.nom }} </td>
+            <td> <button [routerLink]="['/details',employee.id]">details</button></td>
             
         </tr>
     </tbody>

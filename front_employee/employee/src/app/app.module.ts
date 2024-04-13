@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { AddEmployeeFormComponent } from './add-employee-form/add-employee-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailsEmployeeComponent } from './details-employee/details-employee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeListComponent,
-    AddEmployeeFormComponent
+    AddEmployeeFormComponent,
+    DetailsEmployeeComponent
   ],
   imports: [
     BrowserModule,

@@ -24,6 +24,10 @@ export class EmployeeServiceService {
     return this.httpClient.post<Employee>(`${this.baseURL}/add`,e)
   }
 
+  getEmployeeById(id:number){
+    return this.httpClient.get<Employee>(`${this.baseURL}/get/`+id)
+  }
+
   
 
 }
