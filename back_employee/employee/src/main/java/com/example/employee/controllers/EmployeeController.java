@@ -23,4 +23,9 @@ public class EmployeeController {
 
     @PostMapping("/add")
     public Employee AddEmployee(@Valid @RequestBody Employee e){return  employeeRepo.save(e);}
+
+    @GetMapping("/get/{id}")
+public Employee getEmployee( @PathVariable Integer id){return employeeRepo.findById(id).orElse(null);}
+
+
 }
