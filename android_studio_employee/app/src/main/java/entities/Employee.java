@@ -35,6 +35,11 @@ public class Employee {
         this.email = email;
     }
 
+    public Employee(String nom, String email) {
+        this.nom = nom;
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
