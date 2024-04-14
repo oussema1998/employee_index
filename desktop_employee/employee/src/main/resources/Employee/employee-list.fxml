@@ -27,5 +27,10 @@
          </font>
       </Button>
       <Button layoutX="69.0" layoutY="109.0" mnemonicParsing="false" onAction="#refreshTableView" text="refresh" />
+      <Button fx:id="detailsButton" layoutX="608.0" layoutY="109.0" mnemonicParsing="false" onAction="#handleDetailsButtonAction" text="Details" textFill="#3572d4">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
   </children>
 </AnchorPane>

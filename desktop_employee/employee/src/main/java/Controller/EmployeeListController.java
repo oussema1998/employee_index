@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class EmployeeListController {
 
+    public Button detailsButton;
     @FXML
     private TableView<Employee> employeeTableView;
 
@@ -49,7 +51,31 @@ public class EmployeeListController {
         idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom()));
         emailColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        detailsButton.setDisable(true);
+        employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            detailsButton.setDisable(newSelection == null);
+        });
     }
+@FXML
+    private void handleDetailsButtonAction(ActionEvent event) {
+        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
+        if (selectedEmployee != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Employee/details-employee.fxml"));
+                Parent root = loader.load();
+
+                DetailsEmployeeController controller = loader.getController();
+                controller.setSelectedEmployee(selectedEmployee);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Employee Details");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }}
+
     @FXML
     public void GoAddEmploye(ActionEvent event)  {
         try{
@@ -81,4 +107,6 @@ public class EmployeeListController {
     public void refreshTableView(ActionEvent event) {
         refreshListEmployee();
     }
+
+
 }

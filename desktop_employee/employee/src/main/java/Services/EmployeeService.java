@@ -57,4 +57,27 @@ public class EmployeeService {
             System.out.println(ex);
         }
     }
+
+    public static Employee getEmployeeById(int id) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "get/" + id))
+                .GET()  // Explicitly use GET request
+                .build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                Gson gson = new Gson();
+                return gson.fromJson(response.body(), Employee.class);
+            } else {
+                System.out.println("Failed to get employee: " + response.statusCode() + " " + response.body());
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Error when trying to get employee by ID: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

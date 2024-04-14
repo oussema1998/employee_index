@@ -14,5 +14,6 @@ module com.example.employee {
     opens Main to javafx.fxml;
     exports Main;
     exports Controller;
+    exports Entities;
     opens Controller to javafx.fxml;
 }
