@@ -28,6 +28,11 @@ export class EmployeeServiceService {
     return this.httpClient.get<Employee>(`${this.baseURL}/get/`+id)
   }
 
+
+  deleteEmployeeById(id:number){
+    return this.httpClient.delete<Employee>(`${this.baseURL}/delete/`+id)
+  }
+
   
 
 }
