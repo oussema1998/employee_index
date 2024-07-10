@@ -3,34 +3,40 @@ package Employee.main;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.List;
+import android.widget.ImageButton;
 
 import entities.Employee;
 import services.EmployeeService;
 import services.ValidationService;
 
-
 public class AddEmployeeActivity extends AppCompatActivity {
-    private EditText nameField;
 
-    private  EditText emailField;
+    private EditText nameField;
+    private EditText emailField;
     private Button submitButton;
+    private ImageButton zz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_employee);
+
         nameField = findViewById(R.id.nameField);
         emailField = findViewById(R.id.emailField);
         submitButton = findViewById(R.id.button);
+        zz = findViewById(R.id.retourBtn);
 
-
+        zz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,51 +44,61 @@ public class AddEmployeeActivity extends AppCompatActivity {
                 addEmployee();
             }
         });
-
     }
 
     private void addEmployee() {
         String name = nameField.getText().toString().trim();
         String email = emailField.getText().toString().trim();
-        String ErrorMessage="";
-        if (name.isEmpty()){
-            ErrorMessage+="Name is required \n";
-        }
-        if (name.length()>20){
-            ErrorMessage+="Name is too long (20 max) \n";
-        }
-        if (email.isEmpty()){
-            ErrorMessage+="Email is required \n";
+        String errorMessage = "";
 
-        }else
-        {   if(!ValidationService.isEmailValid(email)){
-            ErrorMessage+="Email is invalid \n";
-        }}
+        if (name.isEmpty()) {
+            errorMessage += "Name is required \n";
+        }
+        if (name.length() > 20) {
+            errorMessage += "Name is too long (20 max) \n";
+        }
+        if (email.isEmpty()) {
+            errorMessage += "Email is required \n";
+        } else if (!ValidationService.isEmailValid(email)) {
+            errorMessage += "Email is invalid \n";
+        }
 
-        if(!ErrorMessage.isEmpty()){
+        if (!errorMessage.isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Error");
-            builder.setMessage(ErrorMessage);
+            builder.setMessage(errorMessage);
             builder.setPositiveButton("OK", null);
             AlertDialog dialog = builder.create();
             dialog.show();
-        }else{
-
+        } else {
             Employee newEmployee = new Employee(name, email);
-            EmployeeService employeeService = new EmployeeService();
-            employeeService.add(newEmployee, new EmployeeService.EmployeeCallback() {
-                @Override
-                public void onSuccess(List<Employee> employees) {
-                    Toast.makeText(AddEmployeeActivity.this, "Employee added successfully!", Toast.LENGTH_LONG).show();
-                    finish();
-                }
+            AddEmployeeTask task = new AddEmployeeTask();
+            task.execute(newEmployee);
+        }
+    }
 
-                @Override
-                public void onError(String errorMessage) {
-                    Toast.makeText(AddEmployeeActivity.this, "Failed to add employee: " + errorMessage, Toast.LENGTH_LONG).show();
-                }
-            });
+    private class AddEmployeeTask extends AsyncTask<Employee, Void, String> {
+
+        @Override
+        protected String doInBackground(Employee... employees) {
+            EmployeeService employeeService = new EmployeeService();
+            return employeeService.add(employees[0]);
         }
 
+        @Override
+        protected void onPostExecute(String result) {
+            if ("Success".equals(result)) {
+                // Employee added successfully
+                finish();
+            } else {
+                // Error adding employee
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddEmployeeActivity.this);
+                builder.setTitle("Error");
+                builder.setMessage("Failed to add employee: " + result);
+                builder.setPositiveButton("OK", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
     }
 }

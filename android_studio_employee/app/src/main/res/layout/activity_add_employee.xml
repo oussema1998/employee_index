@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context=".AddEmployeeActivity">
 
+    <ImageButton
+        android:id="@+id/retourBtn"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:onClick="goBack"
+        app:srcCompat="@android:drawable/ic_media_rew" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
