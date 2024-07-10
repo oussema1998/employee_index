@@ -21,7 +21,7 @@ import java.util.List;
 
 public class EmployeeListController {
 
-    public Button detailsButton;
+    public Button detailsButton,deleteButton;
     @FXML
     private TableView<Employee> employeeTableView;
 
@@ -52,8 +52,9 @@ public class EmployeeListController {
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom()));
         emailColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         detailsButton.setDisable(true);
+        deleteButton.setDisable(true);
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            detailsButton.setDisable(newSelection == null);
+            detailsButton.setDisable(newSelection == null); deleteButton.setDisable(newSelection == null);
         });
     }
 @FXML
@@ -109,4 +110,17 @@ public class EmployeeListController {
     }
 
 
+    public void HandleDelete(ActionEvent event) {
+        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
+        if(selectedEmployee!=null){
+        this.employeeService.deleteEmployeeById(selectedEmployee.getId());
+        refreshListEmployee();
+        }else{
+
+
+        }
+
+
+
+    }
 }

@@ -80,4 +80,24 @@ public class EmployeeService {
         }
     }
 
+    public static void deleteEmployeeById(int id) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "delete/" + id))
+                .DELETE()  // Utilisation explicite de la méthode DELETE
+                .build();
+
+        try {
+            HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
+            if (response.statusCode() == 200) {
+                System.out.println("Employee deleted successfully");
+            } else {
+                System.out.println("Failed to delete employee: " + response.statusCode());
+            }
+        } catch (Exception e) {
+            System.out.println("Error when trying to delete employee by ID: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 }
