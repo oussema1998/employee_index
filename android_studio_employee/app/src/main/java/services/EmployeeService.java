@@ -93,4 +93,26 @@ public class EmployeeService {
             return null;
         }
     }
+
+    public boolean deleteEmployeeById(int id) {
+        try {
+            URL url = new URL(BASE_URL + "delete/" + id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                return true;
+            } else {
+                Log.e("EmployeeService", "Failed to delete employee. Response code: " + responseCode);
+                return false;
+            }
+        } catch (Exception e) {
+            Log.e("EmployeeService", "Error deleting employee by ID", e);
+            return false;
+        }
+    }
+
+
+
 }

@@ -108,4 +108,12 @@
         </TableRow>
     </TableLayout>
 
+    <Button
+        android:id="@+id/deletebtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B51818"
+        android:text="Delete"
+        app:strokeColor="#C32929" />
+
 </LinearLayout>

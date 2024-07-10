@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -44,18 +45,37 @@ public class MainActivity extends AppCompatActivity {
 
     private class GetAllEmployeesTask extends AsyncTask<Void, Void, List<Employee>> {
         @Override
+        protected void onPreExecute() {
+            Log.d("MainActivity", "Fetching all employees");
+        }
+
+        @Override
         protected List<Employee> doInBackground(Void... voids) {
-            return employeeService.getAll();
+            try {
+                return employeeService.getAll();
+            } catch (Exception e) {
+                Log.e("MainActivity", "Error fetching employees", e);
+                return null;
+            }
         }
 
         @Override
         protected void onPostExecute(List<Employee> employees) {
             if (employees != null) {
+                Log.d("MainActivity", "Employees fetched successfully");
                 adapter = new EmployeeAdapter(MainActivity.this, employees);
                 employeeListView.setAdapter(adapter);
             } else {
+                Log.e("MainActivity", "Failed to fetch employees");
                 Toast.makeText(MainActivity.this, "Failed to fetch employees", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh employee list when returning to MainActivity
+        new GetAllEmployeesTask().execute();
     }
 }
