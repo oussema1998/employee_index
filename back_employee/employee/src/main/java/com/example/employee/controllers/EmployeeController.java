@@ -27,5 +27,10 @@ public class EmployeeController {
     @GetMapping("/get/{id}")
 public Employee getEmployee( @PathVariable Integer id){return employeeRepo.findById(id).orElse(null);}
 
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable Integer id) {
+        employeeRepo.deleteById(id);
+    }
+
 
 }
