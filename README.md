@@ -1,22 +1,30 @@
-1- Database:
-working with mysql, the database located in Database Directory you can import it with php my admin in database "employee"
+This project involves the implementation of CRUD operations across multiple platforms, including mobile, web, and desktop applications, with input validation.
 
-2- Back (REST API to consume):
-all the consumed API are made with SpringBoot, project located in: back_employee/employee
-don't forget to set up the port, username and password to connect to ur db (mysql) in application.propreties
+1. Database
+Technology: MySQL
+Location: Database Directory
+Import Instructions: Use phpMyAdmin to import the database into the employee database.
 
-3- Front end:
-consumed by front end application Angular: located in: front_employee/employee
+2. Back End (REST API)
+Technology: SpringBoot
+Location: back_employee/employee
+Configuration: Ensure to set up the port, username, and password to connect to your MySQL database in application.properties.
 
-4- Desktop:
-consumed by JavaFX app, (with maven) located in: desktop_employee
+3. Front End (Web Application)
+Technology: Angular
+Location: front_employee/employee
+Functionality: Consumes the REST API.
 
-5- Mobile:
-consumed by an Android Studio application located in: android_studio_employee
-!-IMPORTANT-: you must go to Package 'Utils' open file 'Constatnts' an change the variable 'MY_IP_ADRESS' , put your own ip adress
+4. Desktop Application
+Technology: JavaFX (with Maven)
+Location: desktop_employee
+Functionality: Consumes the REST API.
 
-6- other:
+5. Mobile Application
+Technology: Android Studio
+Location: android_studio_employee
+Configuration: Update the MY_IP_ADDRESS variable in the Constants file located in the Utils package with your own IP address.
 
-you'll find in the screenshot 'success.png' all the project working in the same time, which is a big proud moment for myself.
-
-in this we're showing the list of employees in 3 different projects (mobile, web, desktop) just the getAll CRUD made here, if i have time i'll continue doing the rest of the cruds, i've done it before in Angular, spring, android studio an JAVAFX but in separated projects with teams, but this challenge is to do the same project by myself .
+ Additional Information
+Screenshot: The file result_final.png showcases all the applications working simultaneously, displaying the list of employees.
+Note: This project demonstrates full CRUD operations with input validation across mobile, web, and desktop platforms. This challenge is a personal effort to integrate previous individual projects in Angular, SpringBoot, Android Studio, and JavaFX into a single cohesive project.
