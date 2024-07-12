@@ -14,7 +14,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-<TableView fx:id="employeeTableView" layoutX="28.0" layoutY="134.0" prefHeight="559.0" prefWidth="754.0" style="-fx-background-color: #f2f2f2;" AnchorPane.bottomAnchor="307.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="134.0">
+<TableView fx:id="employeeTableView" layoutX="28.0" layoutY="134.0" prefHeight="421.0" prefWidth="754.0" style="-fx-background-color: #f2f2f2;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="134.0">
 <columns>
   <TableColumn fx:id="idColumn" prefWidth="111.19997787475586" text="id" />
   <TableColumn fx:id="nameColumn" prefWidth="140.8000030517578" text="nom" />
