@@ -99,5 +99,29 @@ public class EmployeeService {
         }
     }
 
+    public static void updateEmployee(Employee employee) {
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(employee);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "update"))
+                .header("Content-Type", "application/json")
+                .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                System.out.println("Employee updated successfully");
+            } else {
+                System.out.println("Failed to update employee: " + response.statusCode() + " " + response.body());
+            }
+        } catch (Exception e) {
+            System.out.println("Error when trying to update employee: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

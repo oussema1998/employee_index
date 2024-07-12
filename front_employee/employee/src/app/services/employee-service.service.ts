@@ -33,6 +33,7 @@ export class EmployeeServiceService {
     return this.httpClient.delete<Employee>(`${this.baseURL}/delete/`+id)
   }
 
-  
+  updateEmployee(employee: Employee) {
+    return this.httpClient.put<Employee>(`${this.baseURL}/update`, employee);}
 
 }

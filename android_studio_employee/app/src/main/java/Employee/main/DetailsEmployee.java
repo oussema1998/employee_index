@@ -2,6 +2,7 @@ package Employee.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,8 @@ public class DetailsEmployee extends AppCompatActivity {
     private ImageButton back;
     private EmployeeService es;
 
+    private int emplID;
+
     private TextView employeeIdTextView, employeeNameTextView, employeeEmailTextView;
 
     @Override
@@ -30,9 +33,20 @@ public class DetailsEmployee extends AppCompatActivity {
         employeeNameTextView = findViewById(R.id.nom);
         employeeEmailTextView = findViewById(R.id.email);
         Button deleteButton = findViewById(R.id.deletebtn);
+        Button updateButton = findViewById(R.id.updatebtn);
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailsEmployee.this, UpdateEmployeeActivity.class);
+                intent.putExtra("employeeId", emplID);
+                startActivity(intent);
+            }
+        });
 
         es = new EmployeeService();
         int employeeId = getIntent().getIntExtra("employeeId", 35);
+        emplID =employeeId ;
 
         employeeIdTextView.setText(String.valueOf(employeeId));
 

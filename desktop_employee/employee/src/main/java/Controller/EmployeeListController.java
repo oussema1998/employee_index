@@ -21,7 +21,7 @@ import java.util.List;
 
 public class EmployeeListController {
 
-    public Button detailsButton,deleteButton;
+    public Button detailsButton,deleteButton,updateButton;
     @FXML
     private TableView<Employee> employeeTableView;
 
@@ -53,8 +53,11 @@ public class EmployeeListController {
         emailColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         detailsButton.setDisable(true);
         deleteButton.setDisable(true);
+        updateButton.setDisable(true);
+
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             detailsButton.setDisable(newSelection == null); deleteButton.setDisable(newSelection == null);
+            updateButton.setDisable(newSelection == null);
         });
     }
 @FXML
@@ -123,4 +126,27 @@ public class EmployeeListController {
 
 
     }
+
+    @FXML
+    private void handleUpdateButtonAction(ActionEvent event) {
+        Employee selectedEmployee = employeeTableView.getSelectionModel().getSelectedItem();
+        if (selectedEmployee != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Employee/update-employee.fxml"));
+                Parent root = loader.load();
+
+                UpdateEmployeeController controller = loader.getController();
+                controller.setSelectedEmployee(selectedEmployee);
+                controller.setEmployeeListController(this);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Update Employee");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

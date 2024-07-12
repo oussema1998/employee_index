@@ -107,13 +107,31 @@
                 android:text="email_here" />
         </TableRow>
     </TableLayout>
-
-    <Button
-        android:id="@+id/deletebtn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#B51818"
-        android:text="Delete"
-        app:strokeColor="#C32929" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/updatebtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#B51818"
+            android:text="Update"
+            android:layout_margin="8dp"
+             />
+
+        <Button
+            android:id="@+id/deletebtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#B51818"
+            android:text="Delete"
+            android:layout_margin="8dp"
+             />
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -32,5 +32,8 @@ public Employee getEmployee( @PathVariable Integer id){return employeeRepo.findB
         employeeRepo.deleteById(id);
     }
 
+    @PutMapping("/update")
+    public Employee updateEmployee(@Valid @RequestBody Employee e){return employeeRepo.save(e);}
+
 
 }

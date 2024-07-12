@@ -27,12 +27,17 @@
          </font>
       </Button>
       <Button layoutX="78.0" layoutY="109.0" mnemonicParsing="false" onAction="#refreshTableView" text="refresh" />
-      <Button fx:id="detailsButton" layoutX="608.0" layoutY="109.0" mnemonicParsing="false" onAction="#handleDetailsButtonAction" text="Details" textFill="#3572d4">
+      <Button fx:id="detailsButton" layoutX="534.0" layoutY="109.0" mnemonicParsing="false" onAction="#handleDetailsButtonAction" text="Details" textFill="#3572d4">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="544.0" layoutY="109.0" mnemonicParsing="false" onAction="#HandleDelete" text="Delete" textFill="#dc4e51">
+      <Button fx:id="deleteButton" layoutX="663.0" layoutY="109.0" mnemonicParsing="false" onAction="#HandleDelete" text="Delete" textFill="#dc4e51">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="updateButton" layoutX="598.0" layoutY="109.0" mnemonicParsing="false" onAction="#handleUpdateButtonAction" text="Update" textFill="#d49d35">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

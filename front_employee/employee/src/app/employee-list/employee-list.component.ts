@@ -23,7 +23,8 @@ import { ActivatedRoute, Router } from '@angular/router';
             <td> {{ employee.email }} </td>
             <td> {{ employee.nom }} </td>
             <td> <button class="btn btn-info" [routerLink]="['/details',employee.id]">details</button >
-            <button class="btn btn-danger" (click)="supprimer(employee.id)">Delete</button></td>
+            <button class="btn btn-danger" (click)="supprimer(employee.id)">Delete</button>
+            <button class="btn btn-primary" [routerLink]="['/edit', employee.id]">Edit</button></td>
           
             
         </tr>

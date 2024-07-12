@@ -113,6 +113,36 @@ public class EmployeeService {
         }
     }
 
+    public String update(Employee employee) {
+        try {
+            URL url = new URL(BASE_URL + "update");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            Gson gson = new Gson();
+            String jsonInputString = gson.toJson(employee);
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                return "Success";
+            } else {
+                return "Error: " + responseCode;
+            }
+        } catch (Exception e) {
+            Log.e("EmployeeService", "Error updating employee", e);
+            return e.getMessage();
+        }
+    }
+
+
+
+
 
 
 }
